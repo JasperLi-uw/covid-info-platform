@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>疫情监控</title>
+		<script src="../static/js/jquery-1.11.1.min.js"></script>
+		<script src="../static/js/echarts.min.js"></script>
+		<link rel="stylesheet" href="../static/css/main.css"/>
+	</head>
+	<body>
+		 <div id="main" style="width: 600px;height:400px;"></div>
+		    <script type="text/javascript">
+		        // based on prepared DOM, initialize echarts instance
+		        var myChart = echarts.init(document.getElementById('main'));
+		
+		        // specify chart configuration item and data
+		        var option = {
+		        	title: {
+		        		text: "全国累计趋势",
+		        		textStyle: {
+		        			// color: 'white',
+		        		},
+		        		left: 'left',
+		        	},
+		        	tooltip: {
+		        		trigger: 'axis',
+		        		axisPointer: {
+		        			type: 'line',
+		        			lineStyle: {
+		        				color: '#7171C6'
+		        			}
+		        		},
+		        	},
+		        	legend: {
+		        		data: ['累计确诊', '现有确诊', '累计治愈', '累计死亡'],
+		        		left: "right"
+		        	},
+		        	
+		        	grid: {
+		        		left: '4%',
+		        		right: '6%',
+		        		bottom: '4%',
+		        		top: 50,
+		        		containLabel: true
+		        	},
+		        	xAxis: [{
+		        		type: 'category',
+		        		data: ['01.20', '01.21', '01.22']
+		        	}],
+		        	yAxis: [{
+		        		type: 'value',
+		        		axisLabel: {
+		        			show: true,
+		        			color: 'white',
+		        			fontSize: 12,
+		        			formatter: function(value) {
+		        				if (value >= 1000) {
+		        					value = value / 1000 + 'k';
+		        				}
+		        				return value;
+		        			}
+		        		},
+		        		axisLine: {
+		        			show: true
+		        		},
+		        		splitLine: {
+		        			show: true,
+		        			lineStyle: {
+		        				color: "#17273B",
+		        				width: 1,
+		        				type: 'solid',
+		        			}
+		        		}
+		        	}],
+		        	series: [{
+		        		name: "累计确诊",
+		        		type: 'line',
+		        		smooth: true,
+		        		data: [260, 406, 529],
+		        	}, {
+		        		name: "现有确诊",
+		        		type: 'line',
+		        		smooth: true,
+		        		data: [54, 37, 3935]
+		        	}, {
+		        		name: "累计治愈",
+		        		type: 'line',
+		        		smooth: true,
+		        		data: [25, 25, 25]
+		        	}, {
+		        		name: "累计死亡",
+		        		type: 'line',
+		        		smooth: true,
+		        		data: [6, 9, 17]
+		        	}]
+		        };
+		        // use configuration item and data specified to show chart
+		        myChart.setOption(option);
+		    </script>
+	</body>
+</html>
